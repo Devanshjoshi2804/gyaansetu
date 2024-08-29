@@ -3,8 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/gestures.dart';
 import 'package:gyaan_setu/screens/login_screen.dart';
 
-
-
 class SignUpScreen extends StatefulWidget {
   @override
   _SignUpScreenState createState() => _SignUpScreenState();
@@ -21,11 +19,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       backgroundColor: Colors.white,
       body: Container(
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Color(0xFF007AFF), Color(0xFF00E7FF)],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
+          color: Color(0xFF007AFF), // Solid color instead of gradient
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -261,26 +255,26 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   Widget _buildLoginText(BuildContext context) {
-  return Center(
-    child: RichText(
-      text: TextSpan(
-        text: "Already have an account? ",
-        style: TextStyle(color: Colors.white70, fontSize: 14),
-        children: [
-          TextSpan(
-            text: "Log in",
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14),
-            recognizer: TapGestureRecognizer()
-              ..onTap = () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => LoginScreen()), // Redirect to LoginScreen
-                );
-              },
-          ),
-        ],
+    return Center(
+      child: RichText(
+        text: TextSpan(
+          text: "Already have an account? ",
+          style: TextStyle(color: Colors.white70, fontSize: 14),
+          children: [
+            TextSpan(
+              text: "Log in",
+              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14),
+              recognizer: TapGestureRecognizer()
+                ..onTap = () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginScreen()), // Redirect to LoginScreen
+                  );
+                },
+            ),
+          ],
+        ),
       ),
-    ),
-  );
-}
+    );
+  }
 }

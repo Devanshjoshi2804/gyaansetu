@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/gestures.dart';
 import 'signup_screen.dart'; // Import the SignUpScreen
+import 'forgot_password_screen.dart'; // Import the ForgotPasswordScreen
+import 'student_profile_screen.dart'; // Import the StudentProfileScreen
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -17,11 +19,7 @@ class _LoginScreenState extends State<LoginScreen> {
       backgroundColor: Colors.white,
       body: Container(
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Color(0xFF007AFF), Color(0xFF00E7FF)],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
+          color: Color(0xFF007AFF), // Solid color instead of gradient
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -65,13 +63,15 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(height: 30),
                 _buildLoginButton(),
                 SizedBox(height: 30),
+                _buildStudentLoginButton(), // Add this line
+                SizedBox(height: 30),
                 _buildForgotPasswordText(context),
                 SizedBox(height: 20),
                 _buildOrDivider(),
                 SizedBox(height: 20),
                 _buildGoogleLoginButton(),
                 SizedBox(height: 30),
-                _buildSignUpText(context), // Updated this line
+                _buildSignUpText(context),
               ],
             ),
           ),
@@ -184,6 +184,35 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+  Widget _buildStudentLoginButton() {
+    return ElevatedButton(
+      onPressed: () {
+        // Navigate to student profile after successful login
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => StudentProfileScreen()),
+        );
+      },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.white, // White background for button
+        padding: EdgeInsets.symmetric(vertical: 18),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        elevation: 6,
+        shadowColor: Colors.black.withOpacity(0.4),
+      ),
+      child: Center(
+        child: Text(
+          "Log In as Student",
+          style: TextStyle(
+            fontSize: 18,
+            color: Color(0xFF007AFF),
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget _buildForgotPasswordText(BuildContext context) {
     return Center(
       child: RichText(
@@ -196,7 +225,11 @@ class _LoginScreenState extends State<LoginScreen> {
               style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14),
               recognizer: TapGestureRecognizer()
                 ..onTap = () {
-                  // Handle forgot password tap
+                  // Navigate to the ForgotPasswordScreen
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ForgotPasswordScreen()),
+                  );
                 },
             ),
           ],
@@ -222,7 +255,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Widget _buildGoogleLoginButton() {
-    return Center(  // Center the button
+    return Center(
       child: OutlinedButton.icon(
         onPressed: () {
           // Handle Google login logic here
